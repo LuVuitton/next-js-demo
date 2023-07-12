@@ -13,7 +13,7 @@ export default async function Characters() {
     console.log("characters not found");
   }
 
-  return (
+  return (  
     <div>
       <div>hello</div>
       {name}
