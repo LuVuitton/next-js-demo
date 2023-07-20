@@ -1,31 +1,46 @@
-"use client"
+"use client";
 
-import { useGetPersonQuery } from "@/store/rtkApi";
-import s from './person.module.css'
+import { Person, useGetPersonQuery } from "@/store/rtkApi";
+import s from "./person.module.css";
+import { useRouter } from "next/navigation";
 
 const Person = (props: Props) => {
+const router = useRouter()
   const { data, isLoading } = useGetPersonQuery(props.params.personID);
 
+  const { image, name,  location, gender, species, status  } = data as Person || {};
+  const locationName = location?.name
 
-  if( isLoading){
-    return <div>Loading...</div>
+  const goToCharacters = ()=> router.push('../characters')
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
   return (
     <div className={s.mainWrapper}>
       <div>
-        <img src={data?.image} alt="hello" />
+        <img src={image} alt="hello" />
       </div>
       <div>
-        <div className={s.name}><h1>{data?.name}</h1></div>
-        <div className={s.description} >
-      <p>LOACTION: <b>   {data?.location.name}</b></p>
-      <p>GENDER:<b>   {data?.gender}</b></p>
-      <p>WHO: <b>  {data?.species}</b></p>
-      <p>STSTUS: <b>  {data?.status}</b></p>
+        <div className={s.name}>
+          <h1>{name}</h1>
+        </div>
+        <div className={s.description}>
+          <p>
+            LOACTION: <b> {locationName}</b>
+          </p>
+          <p>
+            GENDER:<b> {gender}</b>
+          </p>
+          <p>
+            WHO: <b> {species}</b>
+          </p>
+          <p>
+            STSTUS: <b> {status}</b>
+          </p>
+      <button className={s.btn} onClick={goToCharacters}>BACK</button>
         </div>
       </div>
-
-
     </div>
   );
 };

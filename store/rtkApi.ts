@@ -23,7 +23,7 @@ export const {useGetAllCharactersQuery, useGetPersonQuery}= charactersApi
 
 
 
-type Characters = {
+export type Characters = {
     info: {
       count: number;
       pages: number;
@@ -33,7 +33,7 @@ type Characters = {
     results: Person[];
   };
   
-  type Person = {
+ export type Person = {
     id: number;
     name: string;
     status: string;

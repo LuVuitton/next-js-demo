@@ -2,3 +2,19 @@
     display: flex;
     gap: 25px;
 }
+
+.btn {
+    width: 100px;
+    height: 35px;
+    border-radius: 3px;
+    background-color: rgb(199, 236, 203);
+    border: none;
+    color: cadetblue;
+}
+
+.btn:hover {
+    background-color:  rgba(199, 236, 203, 0.675);
+    color: rgb(255, 255, 255);
+
+
+}

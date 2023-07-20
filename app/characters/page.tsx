@@ -20,7 +20,7 @@ const characters = () => {
   ));
 
   if (isLoading) {
-    return <div>LOADING...</div>;
+    return <div>LOADING...!!</div>;
   }
   if (error) {
     const err = error as any;
