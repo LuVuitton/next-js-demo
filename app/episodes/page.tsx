@@ -1,7 +1,11 @@
 import { notFound } from "next/navigation";
 
+
+
+
+
 const getEpisodes = async (): Promise<any> => {
-  const res = await fetch("https://rickandmortyapi.com/api/episode/1");
+  const res = await fetch("https://rickandmortyapi.com/api/episode/2");
 
   return res.json();
 };
@@ -15,7 +19,7 @@ export default async function Characters() {
 
   return (  
     <div>
-      <div>hello</div>
+      <div>hello, i was chnged</div>
       {name}
     </div>
   );

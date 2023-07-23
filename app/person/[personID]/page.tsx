@@ -1,21 +1,41 @@
-"use client";
 
-import { Person, useGetPersonQuery } from "@/store/rtkApi";
+
+import { Person } from "@/store/rtkApi";
 import s from "./person.module.css";
-import { useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 
-const Person = (props: Props) => {
-const router = useRouter()
-  const { data, isLoading } = useGetPersonQuery(props.params.personID);
 
-  const { image, name,  location, gender, species, status  } = data as Person || {};
-  const locationName = location?.name
+//теперь запрос делается на сервере некст
+const getPerson = async (personID: string): Promise<Person> => {
+  const res = await fetch(
+    `https://rickandmortyapi.com/api/character/${personID}`,
+    // {next:{revalidate:0}}
+  );
 
-  const goToCharacters = ()=> router.push('../characters')
+  return await res.json();
+};
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+const Person = async (props: Props) => {
+  const person = await getPerson(props.params.personID);
+  if (!person) {
+    notFound();
   }
+  const { image, name, location, gender, species, status,id } = person;
+  const locationName = location.name;
+
+  // const router = useRouter();
+  // const { data, isLoading } = useGetPersonQuery(props.params.personID);
+
+  // const { image, name, location, gender, species, status } =
+  //   (data as Person) || {};
+  // const locationName = location?.name;
+
+  // const goToCharacters = () => router.push("../characters");
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
     <div className={s.mainWrapper}>
       <div>
@@ -26,9 +46,7 @@ const router = useRouter()
           <h1>{name}</h1>
         </div>
         <div className={s.description}>
-          <p>
-            LOACTION: <b> {locationName}</b>
-          </p>
+          <p>LOACTION: <b> {locationName}</b></p>
           <p>
             GENDER:<b> {gender}</b>
           </p>
@@ -38,7 +56,10 @@ const router = useRouter()
           <p>
             STSTUS: <b> {status}</b>
           </p>
-      <button className={s.btn} onClick={goToCharacters}>BACK</button>
+          {/* <button className={s.btn} onClick={goToCharacters}> */}
+          {/* BACK */}
+          {/* </button> */}
+          <Link href={`../episodes/${id}`}> TO EPISODE FROM</Link>
         </div>
       </div>
     </div>

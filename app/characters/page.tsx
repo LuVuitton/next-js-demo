@@ -8,7 +8,7 @@ import s from "./characters.module.css";
 //   return str.replace(/\s+/g, "_");
 // }
 
-const characters = () => {
+const Сharacters = () => {
   const { data, isLoading, error } = useGetAllCharactersQuery();
 
   const mappedCharacters = data?.results.map((e, i) => (
@@ -30,6 +30,6 @@ const characters = () => {
   return <>{mappedCharacters}</>;
 };
 
-export default characters;
+export default Сharacters;
 
 

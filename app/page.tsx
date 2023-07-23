@@ -5,7 +5,7 @@ import s from './app.module.css'
 
 
 const arr = [1,2,3,4,5,6,7,8,9]
-const mapedarr = arr.map(e=> <div>number:{e}</div>)
+const mapedarr = arr.map((e,i)=> <div key={i}>number:{e}</div>)
 
 
 export default function Home() {
